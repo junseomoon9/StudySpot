@@ -1,0 +1,258 @@
+* {
+  padding: 0 ;
+  margin: 0;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mainapp {
+  min-height: 400px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+.header {
+  min-height: 70px;
+  height: 70px;
+  width: 10vw;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.header h1 {
+  font-family: 'Dela Gothic One', cursive;
+  font-size: 1.5rem;
+  color:rgb(247, 131, 22)
+}
+
+.header h1:hover {
+  cursor: pointer;
+  color: rgb(252, 164, 81)
+}
+
+/* MAIN APP BODY */
+
+.main-app-body {
+  width: 100%;
+  height: calc(100% - 60px) ;
+  display: flex;
+  align-items: center;
+}
+
+/* LEFT SIDEBAR */
+.left-sidebar-container {
+  min-width: 360px;
+  width: 35%;
+  height: 100%;
+  background-color: rgb(245, 239, 218);
+  display: flex;
+  flex-direction: column;
+  align-items: space-evenly;
+  justify-content: space-evenly;
+  font-family: 'Poppins', sans-serif;
+  overflow-y: scroll;
+ 
+}
+
+.add-marker-container {
+  min-height: 365px;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: cyan;
+  padding: 0 5px;
+  max-height: 500px;
+}
+
+.add-marker-container h1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  margin: 0 auto;
+}
+
+.add-marker-container p {
+  font-size: 1.1rem;
+}
+
+.location-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.location-select-bar {
+  width: 57%;
+}
+
+.floor-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.floor-input-bar {
+  border-radius: 5px;
+  border: rgb(151, 150, 150) 1px solid;
+}
+
+.course-code-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.course-code-select-bar {
+  width: 57%;
+}
+
+.seats-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.occupied-seats-select-bar, .total-seats-select-bar {
+  width: 57%;
+}
+
+.description-container {
+  
+  width: 100%;
+  /* height: 35%; */
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.description-container textarea{
+  width: 60%;
+  height: 100%;
+  resize: none;
+  min-height: 120px;
+  padding: 0.3rem;
+}
+
+.create-button-container{
+  
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-button {
+  width: 120px;
+  height: 40px;
+}
+
+.location-container, .floor-container, .course-code-container, .seats-container, .description-container {
+  margin-top: 3px;
+}
+
+.add-marker-container input {
+  width: 55%;
+  padding-left: 3px;
+  font-size: 1rem;
+}
+
+.marker-description-container {
+  
+  width: 90%;
+  height: 47%;
+  margin: 0 auto;
+  padding: 0 5px;
+  background-color: red;
+  max-height: 500px;
+}
+
+
+/* MAP */
+.map-container {
+  min-width: 360px;
+  width: 47%;
+  height: 100%;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  
+}
+
+/* RIGHT SIDEBAR */
+.right-sidebar-container {
+  min-width: 300px;
+  width: 25%;
+  height: 100%;
+  background-color: rgb(245, 239, 218);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.map-controls-container {
+  width: 100%;
+  height: 15%;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.map-controls-container h1 {
+  font-size:1.2rem;
+}
+
+.select-bar {
+  width: 75%;
+  z-index: 10;
+}
+
+.right-sidebar-container-title {
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.right-sidebar-container-title h1 {
+  font-size: 1.2rem;
+}
+
+
+
+/* @media screen  and (max-width: 600px) {
+  .mainapp {
+    flex-direction: column-reverse;
+  }
+
+  .sidebar-container {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .map {
+    width: 100%;
+    min-height: 700px;
+    
+  }
+} */
