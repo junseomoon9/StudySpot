@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Select from 'react-select'
+import {changeCourseCodeSelection, changeViewStudySpot} from '../actions/actions'
+import {useSelector, useDispatch} from 'react-redux'
 
 const RightSidebar = () => {
 
@@ -18,14 +20,60 @@ const RightSidebar = () => {
         
     ]
 
+    const dispatch = useDispatch()
+    const studySpots = useSelector(state => state.studySpotsReducer).studySpots
+
+    const handleCourseCodeChange = (selectedCourse) => {
+        dispatch(changeCourseCodeSelection(selectedCourse.value))
+    }
+
+    const handleClick = (studySpot) => {
+        dispatch(changeViewStudySpot(studySpot))
+    }
+
+    const [markers, setMarkers] = useState([])
+
+    useEffect(() => {
+        const newMarkers = []
+        for (var i=0; i < studySpots.length; i++){
+            const markerIndex = newMarkers.findIndex(el => el.location === studySpots[i].location)
+ 
+            if (markerIndex === -1) {
+                const newLocationMarker = {location: studySpots[i].location, coordinates: studySpots[i].coordinates, studySpots: []}
+                newLocationMarker.studySpots.push(studySpots[i])
+                newMarkers.push(newLocationMarker)
+            } else {
+                newMarkers[markerIndex].studySpots.push(studySpots[i])
+            }
+        }
+        console.log(newMarkers)
+        setMarkers(newMarkers)
+    }, [studySpots])
+
     return (
         <div className="right-sidebar-container">
             <div className="map-controls-container">
                 <h1>View StudySpots with course:</h1>
-                <Select className="select-bar" options={options}  defaultValue={{value: 'All', label: 'All'}} />
+                <Select onChange={handleCourseCodeChange} className="select-bar" options={options}  defaultValue={{value: 'All', label: 'All'}} />
             </div>
-            <div className="right-sidebar-container-title">
-               <h1>Current Study Spots</h1>
+            <div className="all-current-studyspots-container">
+               <h1 className="all-current-studyspots-title">All Current StudySpots</h1>
+               <div className="all-current-studyspots">
+                    {markers.map((marker) => (
+                        <div className="location-with-corresponding-studyspots-container">
+                            <h1 className="location-name">{marker.location}</h1>
+                            {marker.studySpots.map((studySpot) => (
+                                <div className="studyspot-info-container" onClick={() => handleClick(studySpot)}>
+                                    <h2 className="studyspot-info-container-coursecode">Course: {studySpot.courseCode}</h2>
+                                    <h2 className="studyspot-info-container-floor"> Floor: {studySpot.floor}</h2>
+                                    <h2 className="studyspot-info-container-seats">Seats Occupied: {studySpot.occupiedSeats}/{studySpot.totalSeats}</h2>
+                                    
+                                </div>
+                            ))}
+                        </div>
+                        
+                    ))}
+               </div>
             </div>
         </div>
     )

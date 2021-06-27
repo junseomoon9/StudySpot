@@ -152,7 +152,7 @@ const AddMarker = () => {
         e.preventDefault()
         
         const coord = locationsWithCoordinates.find(el => el.name === location).coordinates
-        const studySpot = {location: location, floor: floor, course: course, occupiedSeats: occupiedSeats, totalSeats: totalSeats, description: description, coordinates: coord}
+        const studySpot = {location: location, floor: floor, courseCode: course, occupiedSeats: occupiedSeats, totalSeats: totalSeats, description: description, coordinates: coord}
         dispatch(createStudySpot(studySpot))
         
         //
@@ -166,31 +166,33 @@ const AddMarker = () => {
             <h1>Create Your StudySpot</h1>
             <form >
                 <div className="location-container">
-                    <p>Location: </p>
+                    <p><b>Location: </b></p>
                     <Select ref={locationInput} className="location-select-bar" styles={customStyles} options={locationOptions} onChange={handleLocationChange} />
                 </div>
                 <div className="floor-container">
-                    <p>Floor: </p>
+                    <p><b>Floor: </b></p>
                     <input ref={floorInput} className="floor-input-bar" placeholder="Type in a number..." onChange={handleFloorChange}></input>
                 </div>
                 <div className="course-code-container">
-                    <p>Course Code:</p>
+                    <p><b>Course Code: </b></p>
                     <Select ref={courseInput} className="course-code-select-bar" styles={customStyles} options={courseOptions} onChange={handleCourseChange} />
                 </div>
                 <div className="seats-container">
-                    <p>Occupied Seats:</p>
+                    <p><b>Occupied Seats: </b></p>
                     <Select ref={occupiedSeatsInput} className="occupied-seats-select-bar" styles={customStyles} options={seatOptions} onChange={handleOccupiedSeatsChange} />
                 </div>
                 <div className="seats-container">
-                    <p>Total Seats:</p>
+                    <p><b>Total Seats: </b></p>
                     <Select ref={totalSeatsInput} className="total-seats-select-bar" styles={customStyles} options={seatOptions} onChange={handleTotalSeatsChange} />
                 </div>
                 <div className="description-container">
-                    <p>Description:</p>
+                    <p><b>Description: </b></p>
                     <textarea ref={descriptionTextArea} onChange={handleDescriptionChange} placeholder="Describe exactly where you are inside the building, an article of clothing you're wearing, or an item near you..."></textarea>
                 </div>
                 <div className="create-button-container">
-                    <button className="create-button" onClick={handleSubmit}>Create</button>
+                    <button className="create-button" onClick={handleSubmit}>
+                        <p>Create</p>
+                    </button>
                 </div>
             </form>
         </div>

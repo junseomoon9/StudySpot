@@ -2,7 +2,7 @@
   padding: 0 ;
   margin: 0;
 }
-
+@import url('https://unpkg.com/leaflet@1.5.1/dist/leaflet.css');
 .app {
   width: 100vw;
   height: 100vh;
@@ -19,15 +19,17 @@
 /* HEADER */
 
 .header {
-  min-height: 70px;
-  height: 70px;
-  width: 10vw;
+  min-height: 60px;
+  height: 60px;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 15px;
+  
+  background-color: black;
 }
 
 .header h1 {
+  margin-left: 15px;
   font-family: 'Dela Gothic One', cursive;
   font-size: 1.5rem;
   color:rgb(247, 131, 22)
@@ -49,16 +51,17 @@
 
 /* LEFT SIDEBAR */
 .left-sidebar-container {
-  min-width: 360px;
-  width: 35%;
+  min-width: 400px;
+  width: 34%;
   height: 100%;
-  background-color: rgb(245, 239, 218);
+  /* background-color: rgb(245, 239, 218); */
+  background-color: rgb(255, 143, 62);
   display: flex;
   flex-direction: column;
-  align-items: space-evenly;
-  justify-content: space-evenly;
+  align-items: center;
+  
   font-family: 'Poppins', sans-serif;
-  overflow-y: scroll;
+  overflow-y: auto;
  
 }
 
@@ -66,10 +69,14 @@
   min-height: 365px;
   width: 90%;
   height: 100%;
-  margin: 0 auto;
-  background-color: cyan;
+
   padding: 0 5px;
-  max-height: 500px;
+  max-height: 450px;
+  margin: 1px 0;
+}
+
+.add-marker-container form {
+  height: fit-content;
 }
 
 .add-marker-container h1 {
@@ -79,6 +86,7 @@
   align-items: center;
   font-size: 1.3rem;
   margin: 0 auto;
+  height: fit-content;
 }
 
 .add-marker-container p {
@@ -92,7 +100,7 @@
 }
 
 .location-select-bar {
-  width: 57%;
+  width: 56%;
 }
 
 .floor-container {
@@ -115,7 +123,7 @@
 }
 
 .course-code-select-bar {
-  width: 57%;
+  width: 56%;
 }
 
 .seats-container {
@@ -126,7 +134,7 @@
 }
 
 .occupied-seats-select-bar, .total-seats-select-bar {
-  width: 57%;
+  width: 56%;
 }
 
 .description-container {
@@ -157,8 +165,23 @@
 }
 
 .create-button {
-  width: 120px;
+  width: 70%;
   height: 40px;
+  border-radius: 0.5rem;
+  border: 3px solid rgb(186, 3, 241);
+  background-color: rgb(190, 54, 231);
+  color: white;
+ 
+}
+
+.create-button p {
+  font-weight: 500;
+  font-size: 1.3earem;
+}
+
+.create-button:hover {
+  cursor: pointer;
+  background-color: rgb(205, 103, 236);
 }
 
 .location-container, .floor-container, .course-code-container, .seats-container, .description-container {
@@ -172,20 +195,39 @@
 }
 
 .marker-description-container {
-  
+
   width: 90%;
-  height: 47%;
-  margin: 0 auto;
+  
+  height: fit-content;
+  
   padding: 0 5px;
-  background-color: red;
+ 
   max-height: 500px;
+  
 }
 
+.marker-description-title {
+  width: 100%;
+  font-size: 1.3rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-description-information-container h2{
+  width: 100%;
+  height: 80%;
+  font-size: 1.1rem;
+  font-weight: 400;
+  display: flex;
+
+}
 
 /* MAP */
 .map-container {
   min-width: 360px;
-  width: 47%;
+  width: 39%;
   height: 100%;
 }
 
@@ -195,15 +237,51 @@
   
 }
 
+.popup-container {
+  width: 300px;
+}
+
+.location-with-corresponding-studyspots-container{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.map-marker-popup-location {
+  font-size: 1rem;
+  border-bottom: 3px solid black;
+}
+
+.studySpot-popup-info-container {
+  display: flex;
+  height: fit-content;
+  justify-content: space-between;
+  align-self: center;
+  
+}
+
+.studySpot-popup-info-container:hover {
+  cursor: pointer;
+  background-color: rgb(182, 181, 181);
+}
+
+.studySpot-popup-info-container h2 {
+  font-size: 0.7rem;
+}
+
+
 /* RIGHT SIDEBAR */
 .right-sidebar-container {
   min-width: 300px;
-  width: 25%;
+  width: 27%;
   height: 100%;
-  background-color: rgb(245, 239, 218);
+  background-color: rgb(255, 143, 62);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: 'Poppins', sans-serif;
+  
 }
 
 
@@ -225,20 +303,69 @@
   z-index: 10;
 }
 
-.right-sidebar-container-title {
-  width: 90%;
-  height: 40px;
+.all-current-studyspots-container {
+  width: 100%;
+  height: 80%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 10px;
 }
 
-.right-sidebar-container-title h1 {
+.all-current-studyspots-title {
   font-size: 1.2rem;
+  
 }
 
+.all-current-studyspots {
+  margin-top: 1rem;
+  background-color: white;
+  width: 90%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 1rem;
+}
 
+.location-with-corresponding-studyspots-container {
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  height: fit-content;
+  
+}
+
+.location-name {
+  width: 100%;
+  font-size: 0.9rem;
+  border-bottom: 3px solid black;
+  
+}
+
+.studyspot-info-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  height: fit-content;
+  
+  border-bottom: black 1px solid;
+}
+
+.studyspot-info-container:hover {
+  cursor: pointer;
+  background-color: rgb(189, 188, 186);
+}
+
+.studyspot-info-container h2 {
+  font-size: 0.65rem;
+}
 
 /* @media screen  and (max-width: 600px) {
   .mainapp {

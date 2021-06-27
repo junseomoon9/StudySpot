@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux'
-import studySpots from './studySpotsReducer'
+import studySpotsReducer from './studySpotsReducer'
 
 const allReducers = combineReducers({
-    studySpots: studySpots
+    studySpotsReducer
     
 })
 
