@@ -24,7 +24,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  
+  min-width: 1180px;
   background-color: black;
 }
 
@@ -51,7 +51,7 @@
 
 /* LEFT SIDEBAR */
 .left-sidebar-container {
-  min-width: 400px;
+  min-width: 520px;
   width: 34%;
   height: 100%;
   /* background-color: rgb(245, 239, 218); */
@@ -66,13 +66,13 @@
 }
 
 .add-marker-container {
-  min-height: 365px;
+  min-height: 360px;
   width: 90%;
   height: 100%;
 
   padding: 0 5px;
   max-height: 450px;
-  margin: 1px 0;
+  margin-top: 1rem;
 }
 
 .add-marker-container form {
@@ -97,6 +97,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .location-select-bar {
@@ -107,7 +108,9 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+
 }
 
 .floor-input-bar {
@@ -120,6 +123,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .course-code-select-bar {
@@ -131,6 +135,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .occupied-seats-select-bar, .total-seats-select-bar {
@@ -157,7 +162,7 @@
 }
 
 .create-button-container{
-  
+  margin-top: 0.2rem;
   min-height: 50px;
   display: flex;
   align-items: center;
@@ -171,12 +176,12 @@
   border: 3px solid rgb(186, 3, 241);
   background-color: rgb(190, 54, 231);
   color: white;
- 
+
 }
 
 .create-button p {
   font-weight: 500;
-  font-size: 1.3earem;
+  font-size: 1.3rem;
 }
 
 .create-button:hover {
@@ -203,7 +208,8 @@
   padding: 0 5px;
  
   max-height: 500px;
-  
+  margin-top: 0.76rem;
+  margin-bottom: 0.5rem;
 }
 
 .marker-description-title {
@@ -213,6 +219,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.marker-description-information-container{
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 1rem;
+  border: 2px solid black;
 }
 
 .marker-description-information-container h2{
@@ -287,15 +300,20 @@
 
 .map-controls-container {
   width: 100%;
-  height: 15%;
+  height: 21%;
+  min-height: 100px;
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .map-controls-container h1 {
+ 
   font-size:1.2rem;
+  
+  text-align: center;
 }
 
 .select-bar {
@@ -305,7 +323,7 @@
 
 .all-current-studyspots-container {
   width: 100%;
-  height: 80%;
+  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -315,7 +333,7 @@
 
 .all-current-studyspots-title {
   font-size: 1.2rem;
-  
+  text-align: center;
 }
 
 .all-current-studyspots {
@@ -365,6 +383,74 @@
 
 .studyspot-info-container h2 {
   font-size: 0.65rem;
+}
+
+@media screen  and (min-height: 650px) {
+  .add-marker-container {
+    min-height: 450px;
+  }
+
+  .add-marker-container h1 {
+    
+    font-size: 2rem;
+    
+  }
+  
+  .add-marker-container p {
+    font-size: 1.5rem;
+  }
+
+  .floor-input-bar {
+    height: 25px;
+    
+  }
+
+  .description-container textarea{
+    font-size: 1.1rem;
+  }
+
+  .marker-description-title {
+    font-size: 2rem;
+  }
+
+  .marker-description-information-container h2{
+    font-size: 1.5rem;
+  }
+
+  .map-controls-container h1 {
+    font-size: 2rem;
+  }
+
+  .all-current-studyspots-title {
+    font-size: 2rem;
+    
+  }
+
+
+  .location-name {
+    font-size: 1.2rem;
+  }
+  
+  .studyspot-info-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    height: fit-content;
+    
+    border-bottom: black 1px solid;
+  }
+  
+  .studyspot-info-container:hover {
+    cursor: pointer;
+    background-color: rgb(189, 188, 186);
+  }
+  
+  .studyspot-info-container h2 {
+    font-size: 0.85rem;
+  }
+ 
 }
 
 /* @media screen  and (max-width: 600px) {

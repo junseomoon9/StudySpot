@@ -46,7 +46,7 @@ const RightSidebar = () => {
                 newMarkers[markerIndex].studySpots.push(studySpots[i])
             }
         }
-        console.log(newMarkers)
+        
         setMarkers(newMarkers)
     }, [studySpots])
 

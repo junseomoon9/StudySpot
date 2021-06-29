@@ -1,7 +1,8 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import Select from 'react-select'
 import {createStudySpot} from '../actions/actions'
 import {useSelector, useDispatch} from 'react-redux'
+import axios from "axios"
 
 const AddMarker = () => {
 
@@ -54,7 +55,7 @@ const AddMarker = () => {
     ]
 
     const courseOptions = [
-        { value: 'All', label: 'All'},{ value: 'CSC104H', label: 'CSC104H' },{ value: 'CSC108H', label: 'CSC108H' },{ value: 'CSC110Y1', label: 'CSC110Y1' },
+        { value: 'CSC104H', label: 'CSC104H' },{ value: 'CSC108H', label: 'CSC108H' },{ value: 'CSC110Y1', label: 'CSC110Y1' },
         { value: 'CSC111H', label: 'CSC111H'},{ value: 'CSC120H', label: 'CSC120H' },{ value: 'CSC148H', label: 'CSC148H' },{ value: 'CSC165H', label: 'CSC165H' },
         { value: 'CSC196H', label: 'CSC196H'},{ value: 'CSC197H', label: 'CSC197H' },{ value: 'CSC199H', label: 'CSC199H' },{ value: 'CSC207H', label: 'CSC207H' },
         { value: 'CSC209H', label: 'CSC209H'},{ value: 'CSC236H', label: 'CSC236H' },{ value: 'CSC240H', label: 'CSC240H' },{ value: 'CSC258H', label: 'CSC258H' },
@@ -90,7 +91,8 @@ const AddMarker = () => {
         valueContainer: (provided, state) => ({
             ...provided,
             height: '25px',
-            padding: '0 6px'
+            
+            
         }),
 
         input: (provided, state) => ({
@@ -112,6 +114,8 @@ const AddMarker = () => {
     const [occupiedSeats, setOccupiedSeats] = useState(0)
     const [totalSeats, setTotalSeats] = useState(0)
     const [description, setDescription] = useState("")
+
+    const [createdStudySpot, setCreatedStudySpot] = useState(false)
 
     const locationInput = useRef();
     const floorInput = useRef();
@@ -153,13 +157,30 @@ const AddMarker = () => {
         
         const coord = locationsWithCoordinates.find(el => el.name === location).coordinates
         const studySpot = {location: location, floor: floor, courseCode: course, occupiedSeats: occupiedSeats, totalSeats: totalSeats, description: description, coordinates: coord}
-        dispatch(createStudySpot(studySpot))
+        axios.post("http://localhost:3001/studyspot/addStudySpot", studySpot)
+        .then(res => {
+            
+            dispatch(createStudySpot(studySpot))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
         
         //
         // console.log(locationInput.current)
         // locationInput.current.value = ""
         // locationInput.current.label = ""
     }
+
+    useEffect(() => {
+        axios.post("http://localhost:3001/studyspot/getAllStudySpots", {})
+        .then(res => {
+            const studyspots = res.data.studyspots
+            console.log(studyspots)
+            studyspots.forEach(studySpot => dispatch(createStudySpot(studySpot)))
+        })
+    }, [])
 
     return (
         <div className="add-marker-container">

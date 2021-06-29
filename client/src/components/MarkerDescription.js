@@ -9,11 +9,11 @@ const MarkerDescription = () => {
         <div className="marker-description-container">
           <h1 className="marker-description-title">View StudySpot Info</h1>
           <div className="marker-description-information-container">
-              <h2><b>Location: </b>{studySpot.location}</h2>
-              <h2><b>Floor: </b> {studySpot.floor}</h2>
-              <h2><b>Course Code: </b> {studySpot.courseCode}</h2>
-              <h2><b>Seats Occupied: </b> {studySpot.occupiedSeats}/{studySpot.totalSeats}</h2>
-              <h2><b>Description: </b> {studySpot.description}</h2>
+              <h2><b>Location: </b> &nbsp; {studySpot.location}</h2>
+              <h2><b>Floor: </b> &nbsp; {studySpot.floor}</h2>
+              <h2><b>Course Code: </b> &nbsp; {studySpot.courseCode}</h2>
+              <h2><b>Seats Occupied: </b> &nbsp; {studySpot.occupiedSeats}/{studySpot.totalSeats}</h2>
+              <h2><b>Description: </b> &nbsp; {studySpot.description}</h2>
           </div>
         </div>
     )
