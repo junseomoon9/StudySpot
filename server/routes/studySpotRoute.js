@@ -21,6 +21,11 @@ router.post('/addStudySpot', async(req, res) => {
     }
 })
 
+router.post('/deleteStudySpot', async (req,res) => {
+    await StudySpot.deleteOne({_id: req.body._id})
+    res.sendStatus(200)
+})
+
 router.post('/getAllStudySpots', async (req, res) => {
 
     const studyspots = await StudySpot.find({})
@@ -30,6 +35,16 @@ router.post('/getAllStudySpots', async (req, res) => {
     } catch (err){
         res.status(400).send(err)
     }
+})
+
+router.post('/increaseOccupiedSeats', async (req, res) => {
+    await StudySpot.findOneAndUpdate({_id: req.body._id}, {occupiedSeats: req.body.occupiedSeats + 1})
+    res.send(200)
+})
+
+router.post('/decreaseOccupiedSeats', async (req, res) => {
+    await StudySpot.findOneAndUpdate({_id: req.body._id}, {occupiedSeats: req.body.occupiedSeats - 1})
+    res.send(200)
 })
 
 module.exports = router;

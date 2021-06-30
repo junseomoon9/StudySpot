@@ -33,7 +33,7 @@ const Map = () => {
     }
 
     useEffect(() => {
-        console.log(courseCode)
+       
         var newMarkers = []
         if (courseCode === "All") {
             for (var i=0; i < studySpots.length; i++){
@@ -55,6 +55,7 @@ const Map = () => {
                 if (markerIndex === -1) {
                     if (studySpots[i].courseCode === courseCode) {
                         const newLocationMarker = {location: studySpots[i].location, coordinates: studySpots[i].coordinates, studySpots: []}
+                        newLocationMarker.studySpots.push(studySpots[i])
                         newMarkers.push(newLocationMarker)
                     }
                 } else {

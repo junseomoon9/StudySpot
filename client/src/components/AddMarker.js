@@ -1,8 +1,10 @@
 import React, {useState, useRef, useEffect} from 'react'
 import Select from 'react-select'
-import {createStudySpot} from '../actions/actions'
+import {createStudySpot, deleteStudySpot, increaseOccupiedSeats, decreaseOccupiedSeats} from '../actions/actions'
 import {useSelector, useDispatch} from 'react-redux'
 import axios from "axios"
+import {FaPlus} from 'react-icons/fa'
+import {FaMinus} from 'react-icons/fa'
 
 const AddMarker = () => {
 
@@ -125,7 +127,7 @@ const AddMarker = () => {
     const descriptionTextArea = useRef();
 
     const dispatch = useDispatch()
-    const studySpots = useSelector(state => state.studySpots);
+    const myStudySpot = useSelector(state => state.studySpotsReducer).myStudySpot
 
     const handleLocationChange = (selectedOption) => {
         setLocation(selectedOption.value)
@@ -160,29 +162,67 @@ const AddMarker = () => {
         axios.post("http://localhost:3001/studyspot/addStudySpot", studySpot)
         .then(res => {
             
-            dispatch(createStudySpot(studySpot))
+            dispatch(createStudySpot(res.data))
+            setCreatedStudySpot(!createdStudySpot)
         })
         .catch(err => {
             console.log(err)
         })
         
-        
-        //
-        // console.log(locationInput.current)
-        // locationInput.current.value = ""
-        // locationInput.current.label = ""
+
+    }
+
+    const removeStudySpot = (e) => {
+        e.preventDefault()
+
+        axios.post("http://localhost:3001/studyspot/deleteStudySpot", myStudySpot)
+        .then(res => {
+            setCreatedStudySpot(!createdStudySpot)
+            dispatch(deleteStudySpot(myStudySpot))
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    const handleIncreaseOccupiedSeats = () => {
+        if (myStudySpot.occupiedSeats !== myStudySpot.totalSeats){
+            axios.post("http://localhost:3001/studyspot/increaseOccupiedSeats", myStudySpot)
+            .then(res => {
+                
+                dispatch(increaseOccupiedSeats(myStudySpot._id))
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    }
+
+    const handleDecreaseOccupiedSeats = () => {
+        if (myStudySpot.occupiedSeats !== 1 ){
+            axios.post("http://localhost:3001/studyspot/decreaseOccupiedSeats", myStudySpot)
+            .then(res => {
+                
+                dispatch(decreaseOccupiedSeats(myStudySpot._id))
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     }
 
     useEffect(() => {
         axios.post("http://localhost:3001/studyspot/getAllStudySpots", {})
         .then(res => {
             const studyspots = res.data.studyspots
-            console.log(studyspots)
+       
             studyspots.forEach(studySpot => dispatch(createStudySpot(studySpot)))
         })
     }, [])
 
-    return (
+    if (!createdStudySpot) { 
+        return (
         <div className="add-marker-container">
             <h1>Create Your StudySpot</h1>
             <form >
@@ -217,7 +257,55 @@ const AddMarker = () => {
                 </div>
             </form>
         </div>
-    )
+        )
+    } else {
+        return (
+            <div className="created-studyspot-container">
+                <h1 className="created-studyspot-container-title">Your StudySpot</h1>
+                <div className="created-studyspot-info-container">
+                    <div className="location-container">
+                        <p><b>Location: </b></p>
+                        <div className="value-container">
+                            <p>{myStudySpot.location}</p>
+                        </div> 
+                        
+                    </div>
+                    <div className="floor-container">
+                        <p><b>Floor: </b></p>
+                        <div className="value-container">
+                            <p>{myStudySpot.floor}</p>
+                        </div> 
+                    </div>
+                    <div className="course-code-container">
+                        <p><b>Course Code: </b></p>
+                        <div className="value-container">
+                            <p>{myStudySpot.courseCode}</p>
+                        </div> 
+                    </div>
+                    <div className="seats-container">
+                        <p><b>Occupied Seats: </b></p>
+                        <div className="value-container">
+                            <FaMinus className="minus-icon" onClick={handleDecreaseOccupiedSeats}/>
+                            <p>{myStudySpot.occupiedSeats}/{myStudySpot.totalSeats}</p>
+                            <FaPlus className="plus-icon" onClick={handleIncreaseOccupiedSeats}/>
+                        </div> 
+                    </div>
+                    <div className="description-container">
+                        <p><b>Description: </b></p>
+                        <div className="value-container">
+                            <p>{myStudySpot.description}</p>
+                        </div> 
+                    </div>
+                    <div className="remove-studyspot-button-container">
+                        <button className="remove-studyspot-button" onClick={removeStudySpot}>Remove StudySpot</button>
+                    </div>
+                    
+                </div>
+                
+            </div>   
+        )
+    }
+    
 }
 
 export default AddMarker
