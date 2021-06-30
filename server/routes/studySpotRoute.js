@@ -2,7 +2,7 @@ const router = require('express').Router()
 const StudySpot = require('../models/StudySpot');
 
 router.post('/addStudySpot', async(req, res) => {
-    console.log(req.body)
+  
     const studyspot = new StudySpot({
         location: req.body.location,
         floor: req.body.floor,
@@ -29,7 +29,7 @@ router.post('/deleteStudySpot', async (req,res) => {
 router.post('/getAllStudySpots', async (req, res) => {
 
     const studyspots = await StudySpot.find({})
-    console.log(studyspots)
+
     try {
         res.json({studyspots: studyspots})
     } catch (err){
