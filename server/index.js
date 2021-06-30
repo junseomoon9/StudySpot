@@ -24,6 +24,6 @@ app.use(express.json())
 
 app.use('/studyspot', studySpotRoute)
 
-server.listen( 3001, () => {
+server.listen( process.env.PORT || 3000, () => {
     console.log('Server runing...')
 })

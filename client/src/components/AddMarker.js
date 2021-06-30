@@ -159,7 +159,7 @@ const AddMarker = () => {
         
         const coord = locationsWithCoordinates.find(el => el.name === location).coordinates
         const studySpot = {location: location, floor: floor, courseCode: course, occupiedSeats: occupiedSeats, totalSeats: totalSeats, description: description, coordinates: coord}
-        axios.post("http://localhost:3001/studyspot/addStudySpot", studySpot)
+        axios.post("https://salty-temple-96430.herokuapp.com/studyspot/addStudySpot", studySpot)
         .then(res => {
             
             dispatch(createStudySpot(res.data))
@@ -175,7 +175,7 @@ const AddMarker = () => {
     const removeStudySpot = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:3001/studyspot/deleteStudySpot", myStudySpot)
+        axios.post("https://salty-temple-96430.herokuapp.com/studyspot/deleteStudySpot", myStudySpot)
         .then(res => {
             setCreatedStudySpot(!createdStudySpot)
             dispatch(deleteStudySpot(myStudySpot))
@@ -186,7 +186,7 @@ const AddMarker = () => {
 
     const handleIncreaseOccupiedSeats = () => {
         if (myStudySpot.occupiedSeats !== myStudySpot.totalSeats){
-            axios.post("http://localhost:3001/studyspot/increaseOccupiedSeats", myStudySpot)
+            axios.post("https://salty-temple-96430.herokuapp.com/studyspot/increaseOccupiedSeats", myStudySpot)
             .then(res => {
                 
                 dispatch(increaseOccupiedSeats(myStudySpot._id))
@@ -200,7 +200,7 @@ const AddMarker = () => {
 
     const handleDecreaseOccupiedSeats = () => {
         if (myStudySpot.occupiedSeats !== 1 ){
-            axios.post("http://localhost:3001/studyspot/decreaseOccupiedSeats", myStudySpot)
+            axios.post("https://salty-temple-96430.herokuapp.com/studyspot/decreaseOccupiedSeats", myStudySpot)
             .then(res => {
                 
                 dispatch(decreaseOccupiedSeats(myStudySpot._id))
@@ -213,7 +213,7 @@ const AddMarker = () => {
     }
 
     useEffect(() => {
-        axios.post("http://localhost:3001/studyspot/getAllStudySpots", {})
+        axios.post("https://salty-temple-96430.herokuapp.com/studyspot/getAllStudySpots", {})
         .then(res => {
             const studyspots = res.data.studyspots
        
